@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k++p64-hsiviwhi0cx7w=7rwjmsc04ed!r3(u(chy3^7h0-d%c'
+SECRET_KEY = config('DJANGO_SECRET_KEY', default='clave_por_defecto')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -69,7 +70,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-tyron@DESKTOP-SN3NOT3:~/mProjects$ cat docker-compose.yml
         },
     },
 ]
@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'misi.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'misi_db',
-            'USER': 'postgres',
-            'PASSWORD': '12345',
-            'HOST': '172.24.54.207',
-            'PORT': '5432',
+            'NAME': config('DATABASE_NAME'),
+            'USER': config('DATABASE_USER'),
+            'PASSWORD': config('DATABASE_PASSWORD'),
+            'HOST': config('DATABASE_HOST', default='localhost'),
+            'PORT': config('DATABASE_PORT', default='5432'),
             }
 
         }

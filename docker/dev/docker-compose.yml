@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: ../../misi_project_backend
+    container_name: misi_backend
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # Montar el codigo local para desarrollo
+      - ../../misi_project_backend:/app 
+
+
+  frontend:
+    build: ../../misi_project_frontend
+    container_name: misi_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - WDS_SOCKET_PORT=0
+    depends_on:
+      - backend
+    volumes:
+      - ../../misi_project_frontend:/app
+
+
