@@ -1,0 +1,29 @@
+services:
+  backend:
+    build: ./misi_project_backend
+    ports:
+      - "8000:8000"
+    environment:
+      # En WSL, usal la IP de tu maquina WSL
+      - DATABASE_HOST=host.docker.internal
+      - DATABASE_NAME=misi_db
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=12345
+      - DATABASE_PORT=5432
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./misi_project_backend:/app
+
+  frontend:
+    build: ./misi_project_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./misi_project_frontend:/app
+    environment:
+      - WDS_SOCKET_PORT=0
+    depends_on:
+      - backend
+
+

@@ -1,0 +1,30 @@
+.git
+.gitignore
+.env
+
+.coverage
+htmlcov/
+
+*.swp
+*.swo
+
+# Ignorar el entorno virtal de Python
+venv/
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache
+
+# Archivos de bases de datos locales (si los hay)
+*.sqlite3
+
+# Archivos de registro y temporales
+*.log
+*.bak
+
+# Archivos ocultos del sistema o del editor
+.DS_Store
+.idea/
+.vscode/u
