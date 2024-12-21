@@ -3,8 +3,10 @@ services:
     build: ../../misi_project_backend
     container_name: misi_backend
     ports:
-      - "8000:8000"
+      - "8001:8000"
     extra_hosts:
+      # Permite al contenedor acceder a servicios por fuera
+      # del contenedor, ejemplo una ddbb o una API
       - "host.docker.internal:host-gateway"
     volumes:
       # Montar el codigo local para desarrollo
@@ -15,8 +17,13 @@ services:
     build: ../../misi_project_frontend
     container_name: misi_frontend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
+      # Variable relacionada con Webpack Dev Server(WDS)
+      # que es el servidor de desarrollo utilizado por React
+      # Webpack usa WebSocket para actualizar el contenido de
+      # la pagina en tiempo real(hacer hot-reloading).
+      # Si el hot-reloading en React NO funciona correctamente
       - WDS_SOCKET_PORT=0
     depends_on:
       - backend

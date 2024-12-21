@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/investment';
+const API_BASE_URL = 'http://localhost:8001/investment';
 
 export const getPortfolios = () => {
     return axios.get(`${API_BASE_URL}/portfolio/`);
